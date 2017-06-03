@@ -2,12 +2,24 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view></router-view>
+    <Toast></Toast>
+    <aDialog></aDialog>
+    <Loading></Loading>
+    <ApiLoading></ApiLoading>
+    <popUp></popUp>
   </div>
 </template>
 
 <script>
+import Toast from './components/Toast.vue'
+import aDialog from './components/Dialog.vue'
+import Loading from './components/loading.vue'
+import ApiLoading from './components/ApiLoading.vue'
+import popUp from './components/popUp.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: { Toast, aDialog, Loading, ApiLoading, popUp }
 }
 </script>
 

@@ -4,7 +4,7 @@
     <Toast></Toast>
     <aDialog></aDialog>
     <Loading></Loading>
-    <ApiLoading></ApiLoading>
+    <mixLoading></mixLoading>
     <popUp></popUp>
   </div>
 </template>
@@ -13,12 +13,12 @@
 import Toast from './components/Toast.vue'
 import aDialog from './components/Dialog.vue'
 import Loading from './components/loading.vue'
-import ApiLoading from './components/ApiLoading.vue'
+import mixLoading from './components/mixLoading.vue'
 import popUp from './components/popUp.vue'
 
 export default {
   name: 'app',
-  components: { Toast, aDialog, Loading, ApiLoading, popUp }
+  components: { Toast, aDialog, Loading, mixLoading, popUp }
 }
 </script>
 

@@ -20,7 +20,7 @@ const State = {
     show: false
   },
   loading: true,
-  apiLoading: false
+  mixLoading: false
 }
 
 const Mutations = {
@@ -33,8 +33,8 @@ const Mutations = {
     state.dialog.content = content
     state.dialog.show = show
   },
-  [types.SET_API_LOADING] (state, val) {
-    state.apiLoading = val
+  [types.SET_MIX_LOADING] (state, val) {
+    state.mixLoading = val
   },
   [types.SET_LOADING] (state, val) {
     state.loading = val
@@ -66,11 +66,11 @@ const Actions = {
   [types.CLOSE_LOADING] ({ commit }) {
     commit(types.SET_LOADING, false)
   },
-  [types.OPEN_API_LOADING] ({ commit }) {
-    commit(types.SET_API_LOADING, true)
+  [types.OPEN_MIX_LOADING] ({ commit }) {
+    commit(types.SET_MIX_LOADING, true)
   },
-  [types.CLOSE_API_LOADING] ({ commit }) {
-    commit(types.SET_API_LOADING, false)
+  [types.CLOSE_MIX_LOADING] ({ commit }) {
+    commit(types.SET_MIX_LOADING, false)
   },
   [types.OPEN_POPUP] ({ commit, state }, popUp) {
     commit(types.SET_POPUP, Object.assign({}, state.popUp, popUp, { show: true }))

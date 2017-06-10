@@ -3,24 +3,13 @@
     <div class="scrollwrap" ref="scrollwrap" v-i-scroll>
       <div class="hello">
         <h1>{{ msg }}</h1>
-        <h2>Essential Links</h2>
-        <ul>
-          <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-          <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-          <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-          <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-          <br>
-          <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-        </ul>
-        <h2>Ecosystem</h2>
-        <ul>
-          <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-          <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-          <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-          <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-        </ul>
         <h2>Toast</h2>
         <button @click="toast">click me</button>
+        <h2>mixLoading</h2>
+        <button @click="mixLoading">click me</button>
+        <h2>背景渐变动画</h2>
+        <div class="gradientBg"></div>
+        <h2>使用iScroll横向滚动页面</h2>
         <div class="eventPassthrough" v-i-scroll="{ eventPassthrough: true, scrollX: true, scrollY: false }">
           <div>
             <div>
@@ -44,10 +33,11 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to vue-methods'
     }
   },
   created () {
+    this.$store.dispatch(this.$types.CLOSE_LOADING)
   },
   mounted () {
     this.$refs.scrollwrap.style.height = window.innerHeight - this.$refs.container.offsetTop + 'px'
@@ -55,6 +45,12 @@ export default {
   methods: {
     toast () {
       this.$store.dispatch(this.$types.OPEN_TOAST, { content: 'hello' })
+    },
+    mixLoading () {
+      this.$store.dispatch(this.$types.OPEN_MIX_LOADING)
+      setTimeout(() => {
+        this.$store.dispatch(this.$types.CLOSE_MIX_LOADING)
+      }, 5000)
     }
   }
 }
@@ -62,38 +58,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-.pass{
-  display flex
-
-}
-.passthrougha {
-  flex 0 0 auto
-  display flex
-}
-.passthrougha > div {
-  width 200px
-  flex 0 0 auto
-}
 h1, h2
-  margin-top: 0;
-  padding-top: 20px;
-  font-weight: normal;
+  margin-top 0
+  padding-top 20px
+  font-weight normal
 
-ul
-  list-style-type: none;
-  padding: 0;
-
-li
-  display: inline-block;
-  margin: 0 10px;
-
-a
-  color: #42b983;
 .scrollwrap
-  overflow: hidden;
+  overflow hidden
 
 .hello
-  height: 10000px;
+  height 10000px
 
 .eventPassthrough
   display flex
@@ -103,4 +77,36 @@ a
     >div
       width 200px
       flex 0 0 auto
+      margin 20px
+      border 1px solid #d8d8d8
+
+.gradientBg
+  position relative
+  overflow hidden
+  width 80%
+  height 80px
+  margin 40px auto
+  &:before
+    content ''
+    position absolute
+    top -100%
+    left -100%
+    bottom -100%
+    right -100%
+    background linear-gradient(45deg, #ffc700 0%, #e91e1e 50%, #6f27b0 100%)
+    background-size 100% 100%
+    animation bgposition 8s infinite linear alternate
+    z-index -1
+
+@keyframes bgposition
+  0%
+    transform translate(30%, 30%)
+  25%
+    transform translate(30%, -30%)
+  50%
+    transform translate(-30%, -30%)
+  75%
+    transform translate(-30%, 30%)
+  100%
+    transform: translate(30%, 30%);
 </style>
